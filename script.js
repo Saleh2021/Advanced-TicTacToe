@@ -12,19 +12,42 @@ const winArray = [
     [1,4,7],
     [2,5,8]
 ]
+const nav = document.querySelectorAll('.nav')
+const restart = document.getElementById("btn")
+const coop = nav[1]
 const cells = document.querySelectorAll('.cell')
-startGame()
-function startGame(){
-    humTurn = true
-    document.querySelector('.winning-message').style.display="none"
-    document.getElementById("board").style.backgroundColor = "white"
-    trackBoard = Array.from(Array(9).keys())
+coop.addEventListener('click',startGame)
+restart.addEventListener('click',rest)
+
+function rest(){
+    restart.style.display="none";
+    for(let i=0;i<nav.length;i++){
+        nav[i].style.display="inline"
+    }
     for(let i=0;i<cells.length;i++){
         cells[i].innerText=''
         cells[i].style.removeProperty('background-color')
         cells[i].style.cursor= "pointer"
+        
+    }
+    for(var i = 0; i<cells.length;i++){
+        cells[i].removeEventListener('click',turnClick,false)
+    }
+    document.querySelector('.winning-message').style.display="none"
+    document.getElementById("board").style.backgroundColor = "white"
+}
+function startGame(){
+    for(let i=0;i<nav.length;i++){
+        nav[i].style.display="none"
+    }
+    restart.style.display="inline";
+    humTurn = true
+    for(let i=0;i<cells.length;i++){
+        cells[i].style.cursor= "pointer"
         cells[i].addEventListener('click',turnClick,{once:true})
     }
+    trackBoard = Array.from(Array(9).keys())
+    
 }
 function turnClick(square){
     
@@ -49,7 +72,6 @@ function turn(squareId,player){
 function checkWin(board,player){
     let plays = board.reduce((a,e,i)=>
     (e===player)?a.concat(i):a,[]);
-    console.log(plays)
     let gameWon=null
     for(let [index,win]of winArray.entries()){
         if(win.every(elem => plays.indexOf(elem)>-1)){

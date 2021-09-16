@@ -82,7 +82,7 @@ body{
 }
 
 #btn{
-    display: none;
+    display:none;
     background-color: coral;
     font-weight: bolder;
     letter-spacing: 2px;
