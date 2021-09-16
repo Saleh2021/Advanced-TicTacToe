@@ -8,6 +8,12 @@
     <title>Tic-Tac-Toe</title>
   </head>
   <body>
+    <div class="navBar">
+      <div class="nav navtxt">Choose Your Mode</div>
+      <button class="nav navB">Coop</button>
+      <button class="nav navB">Computer</button>
+      <button id="btn" class="navB" onclick="startGame()">Restart</button>
+    </div>
     <table class="board" id="board">
       <tr>
         <td class="cell" id="0"></td>
@@ -27,12 +33,6 @@
     </table>
     <div class="winning-message" id="msg">
       <div class="text" id="txt"></div>
-    </div>
-    <button id="btn" onclick="startGame()">Restart</button>
-    <div>
-      <h2>Choose Your Mode</h2>
-      <button>Coop</button>
-      <button>Computer</button>
     </div>
     <script src="script.js"></script>
   </body>
