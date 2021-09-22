@@ -1,6 +1,6 @@
 var trackBoard;
-const humPlayer = 'O'
-const aiPlayer = 'X'
+const humPlayer = 'X'
+const aiPlayer = 'O'
 var humTurn = true
 const winArray = [
     [0,1,2],
@@ -15,8 +15,10 @@ const winArray = [
 const nav = document.querySelectorAll('.nav')
 const restart = document.getElementById("btn")
 const coop = nav[1]
+const ai = nav[2]
 const cells = document.querySelectorAll('.cell')
 coop.addEventListener('click',startGame)
+ai.addEventListener('click',startGame)
 restart.addEventListener('click',rest)
 
 function rest(){
@@ -51,11 +53,17 @@ function startGame(){
 }
 function turnClick(square){
     
+    
     if(humTurn){
         turn(square.target.id,humPlayer);
         humTurn = !humTurn
     }else if(!humTurn){
-        turn(square.target.id,aiPlayer);
+        if(ai.addEventListener){
+            minimax()
+        }else{
+            turn(square.target.id,aiPlayer);
+        }
+        
         humTurn = !humTurn
     }
 
