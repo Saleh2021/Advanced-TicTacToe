@@ -40,7 +40,7 @@ function rest() {
   document.getElementById("board").style.backgroundColor = "white";
 }
 function startGame(value) {
-  iD = false
+  iD = false;
   for (let i = 0; i < nav.length; i++) {
     nav[i].style.display = "none";
   }
@@ -52,46 +52,39 @@ function startGame(value) {
     for (let i = 0; i < cells.length; i++) {
       cells[i].style.cursor = "pointer";
 
-      cells[i].addEventListener("click",turnComp , { once: true });
+      cells[i].addEventListener("click", turnComp, { once: true });
     }
-  }else if(value.target.id == "cop"){
+  } else if (value.target.id == "cop") {
     for (let i = 0; i < cells.length; i++) {
-        cells[i].style.cursor = "pointer";
-  
-        cells[i].addEventListener("click",turnCoop , { once: true });
-    
-  }
+      cells[i].style.cursor = "pointer";
+
+      cells[i].addEventListener("click", turnCoop, { once: true });
+    }
   }
   trackBoard = Array.from(Array(9).keys());
 }
-function turnComp(tu){
-        turn(tu.target.id,humPlayer)
-        if(!iD){
-          var mini=minimax(trackBoard,aiPlayer)
-          turn(mini.index,aiPlayer)
-        }
-        
-        
-        
-    }
-function turnCoop(tu){
+function turnComp(tu) {
+  turn(tu.target.id, humPlayer);
+  if (!iD) {
+    var mini = minimax(trackBoard, aiPlayer);
+    turn(mini.index, aiPlayer);
+  }
+}
+function turnCoop(tu) {
   if (humTurn) {
-      
-      turn(tu.target.id, humPlayer);
-  
-      humTurn = !humTurn;
-    } else if (!humTurn) {
-      
-      turn(tu.target.id, aiPlayer);
-  
-      humTurn = !humTurn;
-    }
+    turn(tu.target.id, humPlayer);
+
+    humTurn = !humTurn;
+  } else if (!humTurn) {
+    turn(tu.target.id, aiPlayer);
+
+    humTurn = !humTurn;
+  }
 }
 
 function turn(squareId, player) {
   trackBoard[squareId] = player;
-  
-  
+
   cells[squareId].style.cursor = "not-allowed";
   document.getElementById(squareId).innerText = player;
   let gameWon = checkWin(trackBoard, player);
@@ -108,7 +101,7 @@ function checkWin(board, player) {
     }
   }
   if (plays.length === 5 && gameWon === null) {
-  itDraw();
+    itDraw();
   }
   return gameWon;
 }
@@ -126,15 +119,14 @@ function gameOver(gameWon) {
 }
 //if it's a Draw
 function itDraw() {
-    iD=true
-    for (var i = 0; i < cells.length; i++) {
-      cells[i].removeEventListener("click", turnComp, false);
-      cells[i].removeEventListener("click", turnCoop, false);
-    
+  iD = true;
+  for (var i = 0; i < cells.length; i++) {
+    cells[i].removeEventListener("click", turnComp, false);
+    cells[i].removeEventListener("click", turnCoop, false);
+
     document.getElementById("board").style.backgroundColor = "yellow";
     winningMsg("draw");
   }
-  
 }
 //show winning message
 function winningMsg(player) {
@@ -198,7 +190,7 @@ function minimax(board, player) {
   }
 
   //the chosen move
-  
+
   return moves[bestMove];
 }
 
